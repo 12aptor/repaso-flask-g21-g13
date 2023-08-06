@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask API - Users</title>
+  </head>
+  <body>
+    <h1>Lista de usuarios</h1>
+    <ul id="usersList"></ul>
+    <script>
+      const usersList = document.querySelector("#usersList");
+
+      const getData = async () => {
+        const users = await fetch("http://127.0.0.1:5000/users");
+        const usersJson = await users.json();
+        
+        usersJson.forEach((user) => {
+          console.log(user);
+          const li = document.createElement("li");
+          li.innerHTML = `Nombre: ${user.name}, Email: ${user.email}`;
+          usersList.appendChild(li);
+        });
+      };
+      getData();
+    </script>
+  </body>
+</html>
